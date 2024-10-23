@@ -6,12 +6,6 @@ import { queryClient } from '../../shared/api/queryClient';
 export const useCreateTodo = () => {
   const createTodoMutation = useMutation({
     mutationFn: todoListApi.createTodo,
-    // onSuccess: () => {
-    //   console.log('success');
-    //   queryClient.invalidateQueries({ queryKey: [todoListApi.baseKey] });
-    // второй вариант
-    //   queryClient.invalidateQueries(todoListApi.getTodoListQueryOptions());
-    // },
     onError: () => {
       console.log('error');
     },
