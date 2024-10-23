@@ -17,8 +17,19 @@ class ApiError extends Error {
 //     return data;
 //   };
 
-export const jsonApiInstance = async <T>(url: string, init?: RequestInit) => {
-  const result = await fetch(API_URL + url, init);
+export const jsonApiInstance = async <T>(
+  url: string,
+  init?: RequestInit & { json?: unknown },
+) => {
+  let headers = init?.headers ?? {};
+  if (init?.json) {
+    headers = {
+      ...headers,
+      'Content-Type': 'application/json',
+    };
+    init.body = JSON.stringify(init.json);
+  }
+  const result = await fetch(API_URL + url, { ...init, headers });
   if (!result.ok) {
     throw new ApiError(result);
   }
