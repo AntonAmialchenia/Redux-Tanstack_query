@@ -21,7 +21,7 @@ export const useTodoList = () => {
     isLoading,
   } = useQuery({
     ...todoListApi.getTodoListQueryOptions(),
-    select: data => data.reverse()
+    // select: data => data.reverse()
   });
 
 //   const cursorRef = useIntersection(() => fetchNextPage());

@@ -14,15 +14,11 @@ export const useDeleteTodo = () => {
     },
     onSuccess: async (_, deleteId) => {
       console.log('onSuccess');
-      const todos = queryClient.getQueryData(
+
+      queryClient.setQueryData(
         todoListApi.getTodoListQueryOptions().queryKey,
+        (todos) => todos?.filter((todo) => todo.id !== deleteId),
       );
-      if (todos) {
-        queryClient.setQueryData(
-          todoListApi.getTodoListQueryOptions().queryKey,
-          todos.filter((todo) => todo.id !== deleteId),
-        );
-      }
     },
   });
 

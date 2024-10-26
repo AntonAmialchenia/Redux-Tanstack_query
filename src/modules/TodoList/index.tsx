@@ -1,11 +1,13 @@
 import { useTodoList } from './useTodoList';
 import { useCreateTodo } from './useCreateTodo';
 import { useDeleteTodo } from './useDeleteTodo';
+import { useUpdateTodo } from './useUpdateTodo';
 
 export const TodoList = () => {
   const { error, isLoading, todoItems } = useTodoList();
   const createTodo = useCreateTodo();
   const deleteTodo = useDeleteTodo();
+  const updateTodo = useUpdateTodo();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -50,7 +52,12 @@ export const TodoList = () => {
               <p>{item.description}</p>
             </div>
             <div className="flex gap-4 items-center">
-              <input type="checkbox" readOnly checked={item.completed} />
+              <input
+                type="checkbox"
+                onChange={() => updateTodo.toggleTodo(item.id, item.completed)}
+                readOnly
+                checked={item.completed}
+              />
               <button
                 className="border rounded disabled:opacity-50 p-2 disabled:bg-slate-500 disabled:cursor-not-allowed"
                 disabled={deleteTodo.getIsPending(item.id)}

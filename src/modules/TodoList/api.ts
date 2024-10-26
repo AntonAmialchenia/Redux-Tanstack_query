@@ -15,7 +15,7 @@ type PaginatedResult<T> = {
   prev: number | null;
 };
 
-interface TodoDto {
+export interface TodoDto {
   id: string;
   title: string;
   description: string;
@@ -69,8 +69,8 @@ export const todoListApi = {
       json: todo,
     });
   },
-  updateTodo: (id: string, todo: Partial<TodoDto>) => {
-    return jsonApiInstance<TodoDto>(`/tasks/${id}`, {
+  updateTodo: (todo: Partial<TodoDto> & { id: string }) => {
+    return jsonApiInstance<TodoDto>(`/tasks/${todo.id}`, {
       method: 'PATCH',
       json: todo,
     });
