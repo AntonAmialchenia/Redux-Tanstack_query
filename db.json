@@ -1,10 +1,27 @@
 {
+  "users": [
+    {
+      "id": "1",
+      "login": "user1",
+      "password": "password1"
+    },
+    {
+      "id": "2",
+      "login": "user2",
+      "password": "password2"
+    },
+    {
+      "id": "3",
+      "login": "user3",
+      "password": "password3"
+    }
+  ],
   "tasks": [
     {
       "id": "1",
       "title": "Task 1",
       "description": "Task 1 description",
-      "completed": false
+      "completed": true
     },
     {
       "id": "2",

@@ -1,13 +1,21 @@
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '../shared/api/queryClient';
+import { Login } from '../modules/auth/Login';
+import { LogoutButton } from '../modules/auth/logoutButton';
+import { useUser } from '../modules/auth/useUser';
 import { TodoList } from '../modules/TodoList';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TodoList/>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  );
+  const user = useUser();
+  console.log(user.data);
+  if (user.isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (user.data) {
+    return (
+      <>
+        <LogoutButton />
+        <TodoList />
+      </>
+    );
+  }
+  return <Login />;
 }
